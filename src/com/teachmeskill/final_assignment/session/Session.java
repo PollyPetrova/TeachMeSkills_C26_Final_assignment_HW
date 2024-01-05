@@ -17,7 +17,7 @@ public class Session {
         setExpDate();
     }
 
-    //Метод для проберки существования сессии
+    //Метод для проверки существования сессии
     public boolean isSessionAlive(){
         if (this.accessToken.length()== Utils.ACCESS_TOKEN_LENGTH && this.expDate.after(new Date())){
             return true;
