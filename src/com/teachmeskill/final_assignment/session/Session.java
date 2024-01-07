@@ -1,6 +1,6 @@
 package com.teachmeskill.final_assignment.session;
 
-import com.teachmeskill.final_assignment.utils.Utils;
+import com.teachmeskill.final_assignment.utils.Constant;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -19,7 +19,7 @@ public class Session {
 
     //Метод для проверки существования сессии
     public boolean isSessionAlive(){
-        if (this.accessToken.length()== Utils.ACCESS_TOKEN_LENGTH && this.expDate.after(new Date())){
+        if (this.accessToken.length()== Constant.ACCESS_TOKEN_LENGTH && this.expDate.after(new Date())){
             return true;
         }else {
             return false;

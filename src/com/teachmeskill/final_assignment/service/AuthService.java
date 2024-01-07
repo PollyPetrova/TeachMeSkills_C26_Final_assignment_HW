@@ -1,4 +1,4 @@
-package com.teachmeskill.final_assignment.service.authorization;
+package com.teachmeskill.final_assignment.service;
 
 import com.teachmeskill.final_assignment.coder.Coder;
 import com.teachmeskill.final_assignment.session.Session;
