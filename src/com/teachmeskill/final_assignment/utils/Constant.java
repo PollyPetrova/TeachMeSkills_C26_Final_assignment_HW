@@ -11,6 +11,7 @@ public interface Constant {
 
     String REGEXP_TRANSACTION_CHECK = ".*\\bEURO [0-9]+([0-9]{2})?\\b.*";
     String REGEXP_TRANSACTION_INVOICE = ".*\\bTotal\\b.*";
+    String REGEXP_TRANSACTION_ORDER = ".*\\b([a-zA-Z]+)?(Total)\\b.*";
 
     //регурярки для проверки названия файлов
     String REGEXP_DOC_CHECK = "2023_Electric_Bill_(\\d{2})\\.txt";
