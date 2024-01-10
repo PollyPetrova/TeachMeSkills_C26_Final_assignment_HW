@@ -46,12 +46,13 @@ public class StatisticService {
                 throw new Exception("Unexpected error");
             }
         }
+        //переводим в доллары, возвращаем значение суммы
         amountAllCheck = amountAllCheck * EURO_TO_USD;
         return amountAllCheck;
     }
 
-//работаю над ним..
-   public static double calculateStatisticInvoice(String path) throws Exception {
+    public static double calculateStatisticInvoice(String path) throws Exception {
+        //создаем массив инвойсов
         File directInvoice = new File(path);
         File[] directInvoiceArray = directInvoice.listFiles();
         double amountAllInvoice = 0; // переменная для суммирования транзакций
@@ -69,14 +70,17 @@ public class StatisticService {
                     if (!stringStatistic.isEmpty() && stringStatistic.matches(REGEXP_TRANSACTION_INVOICE)) {
                         System.out.println(stringStatistic);
                         double amount;// переменная для суммы из конкретного файла
+                        //Создаем объекты класса паттерн и метчер для поиска суммы из строки
                         Pattern pattern = Pattern.compile("(\\d)+(\\.?)\\d+");
                         Matcher matcher = pattern.matcher(stringStatistic);
-
+                        //Объект класса стрингбилдер для составления строки суммы по регурярному выражению
+                        //из строки с статистикой суммы
                         StringBuilder amountStr = new StringBuilder();
-                        while(matcher.find()) {
+                        while (matcher.find()) {
                             amountStr.append(matcher.group());
                         }
-                        System.out.println(amountStr);
+                        System.out.println(amountStr);//TODO для провеки работы, потом удалить
+                        //преобразование и запись в переменную суммы перевода, суммирование с полной суммой документов
                         amount = Double.parseDouble(amountStr.toString());
                         amountAllInvoice = amountAllInvoice + amount;
                     }
@@ -84,12 +88,14 @@ public class StatisticService {
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("Conversion error");
             } catch (Exception e) {
-                throw new Exception("Unexpected error");
+                throw new Exception("Unexpected error");//TODO наверное еще добавить отдельно ошибку закрытия ресурсов?
+                //TODO не помню, нужено ли это при трай кетч виз ресурс
             }
         }
-        System.out.println(amountAllInvoice);
+        System.out.println(amountAllInvoice);//TODO для проверки работы, потом удалить
+        //возврат значения итоговой суммы
         return amountAllInvoice;
-}
+    }
 
 
     public static double calculateStatisticOrder(String path) throws Exception {
@@ -117,7 +123,7 @@ public class StatisticService {
                         Matcher matcher = pattern.matcher(stringStatistic);
                         //в стрингбилдер записываем найденные цифры
                         StringBuilder amountStr = new StringBuilder();
-                        while(matcher.find()) {
+                        while (matcher.find()) {
                             amountStr.append(matcher.group());
                         }
                         System.out.println(amountStr);
@@ -133,26 +139,31 @@ public class StatisticService {
                 throw new Exception("Unexpected error");
             }
         }
-        System.out.println(amountAllOrder);
+        System.out.println(amountAllOrder);//TODO для проверки работы, потом удалить
+        //возврат значения итоговой суммы
         return amountAllOrder;
 
     }
 
+    //Метод записи всей статистики в отдельный файл с ней
     public static void calculateStatisticFinal(double check, double invoice, double order) throws Exception {
+        //создаем ппеременную с общей суммой
         double result = check + invoice + order;
+        //создаем строки для каждого вида суммы
         String checkResult = "The total annual amount of transfers in USD by checks: " + check + "\n";
         String invoiceResult = "The total annual amount of transfers in USD by invoice: " + invoice + "\n";
         String orderResult = "The total annual amount of transfers in USD by order: " + order + "\n";
         String resultAll = "The total annual amount of transfers in USD by all documents: " + result + "\n";
 
-        try{
+        //Записываем строки в документ статистики статическим методом класса Файлс
+        try {
             Path pathStatistic = Path.of(PATH_YEAR_TURNOVER);
             Files.write(pathStatistic, checkResult.getBytes(), StandardOpenOption.APPEND);
             Files.write(pathStatistic, invoiceResult.getBytes(), StandardOpenOption.APPEND);
             Files.write(pathStatistic, orderResult.getBytes(), StandardOpenOption.APPEND);
             Files.write(pathStatistic, resultAll.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IOException("Error writing to file");
         }
     }
 
