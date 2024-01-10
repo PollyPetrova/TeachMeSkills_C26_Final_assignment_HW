@@ -25,6 +25,7 @@ public class Runner {
         System.out.println(Coder.code("Polina123987"));*/
 
         //Считываем путь к папке с файлами
+        //TODO обработать возможность того, чтот папки пуста или несуществует
         System.out.println("Enter path to the Directory:");
         String resourcePath = scanner.nextLine();
 

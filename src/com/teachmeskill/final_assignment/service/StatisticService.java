@@ -22,6 +22,7 @@ public class StatisticService {
         double amountAllCheck = 0; // переменная для суммирования транзакций
 
         //идем по массиву
+        //TODO обработать NullPointerExeption
         for (File check : directCheckArray) {
             String checkPath = check.getPath();
 
@@ -58,6 +59,7 @@ public class StatisticService {
         double amountAllInvoice = 0; // переменная для суммирования транзакций
 
         //идем по массиву
+        //TODO обработать NullPointerExeption
         for (File invoice : directInvoiceArray) {
             String invoicePath = invoice.getPath();
 
@@ -105,6 +107,7 @@ public class StatisticService {
         double amountAllOrder = 0; // переменная для суммирования транзакций
 
         //идем по массиву
+        //TODO обработать NullPointerExeption
         for (File order : directOrderArray) {
             String orderPath = order.getPath();
 
