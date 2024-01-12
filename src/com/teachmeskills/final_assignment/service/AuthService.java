@@ -1,8 +1,8 @@
-package com.teachmeskill.final_assignment.service;
+package com.teachmeskills.final_assignment.service;
 
-import com.teachmeskill.final_assignment.coder.Coder;
-import com.teachmeskill.final_assignment.session.Session;
-import com.teachmeskill.final_assignment.storage.StorageMock;
+import com.teachmeskills.final_assignment.coder.Coder;
+import com.teachmeskills.final_assignment.session.Session;
+import com.teachmeskills.final_assignment.storage.StorageMock;
 
 public class AuthService {
 

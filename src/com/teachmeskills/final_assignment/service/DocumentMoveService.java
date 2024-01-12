@@ -1,4 +1,4 @@
-package com.teachmeskill.final_assignment.service;
+package com.teachmeskills.final_assignment.service;
 
 import java.io.File;
 import java.io.IOException;

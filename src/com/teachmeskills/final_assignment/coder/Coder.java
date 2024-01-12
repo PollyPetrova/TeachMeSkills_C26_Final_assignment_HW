@@ -1,4 +1,4 @@
-package com.teachmeskill.final_assignment.coder;
+package com.teachmeskills.final_assignment.coder;
 
 import java.util.Base64;
 import java.util.Random;

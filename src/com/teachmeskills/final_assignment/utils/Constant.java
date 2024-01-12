@@ -1,10 +1,10 @@
-package com.teachmeskill.final_assignment.utils;
+package com.teachmeskills.final_assignment.utils;
 
 public interface Constant {
 
     int ACCESS_TOKEN_LENGTH = 16;
 
-    // для конвертаци валют
+    // для конвертации валют
     double EURO_TO_USD = 1.09;
 
     //регулярные выражения для поиска суммы переводов в документах
@@ -27,5 +27,9 @@ public interface Constant {
 
     //путь к статистическим файлам
     String PATH_YEAR_TURNOVER = "C:\\Users\\Liisa\\Desktop\\уроки Java\\Homework\\TeachMeSkills_C26_Final_assignment_HW\\result\\statistic\\year_cash_turnover";
+
+    //путь к файлам с log
+    String PATH_EXECUTION_LOG="D:\\JAVA\\New_TeachMeSkills_C26_Final_assignment\\log\\execution_log\\execution_log";
+    String PATH_ERROR_LOG="D:\\JAVA\\New_TeachMeSkills_C26_Final_assignment\\log\\error_log\\error_log";
 
 }

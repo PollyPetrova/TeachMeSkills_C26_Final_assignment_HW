@@ -1,6 +1,6 @@
-package com.teachmeskill.final_assignment.session;
+package com.teachmeskills.final_assignment.session;
 
-import com.teachmeskill.final_assignment.utils.Constant;
+import com.teachmeskills.final_assignment.utils.Constant;
 
 import java.util.Calendar;
 import java.util.Date;
