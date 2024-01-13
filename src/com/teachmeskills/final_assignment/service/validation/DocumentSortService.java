@@ -3,7 +3,6 @@ package com.teachmeskills.final_assignment.service.validation;
 import com.teachmeskills.final_assignment.custom_exeption.CheckFileException;
 import com.teachmeskills.final_assignment.custom_exeption.CheckSessionException;
 import com.teachmeskills.final_assignment.logger.Logger;
-import com.teachmeskills.final_assignment.service.validation.DocumentNameValidService;
 import com.teachmeskills.final_assignment.session.Session;
 
 import java.io.File;
@@ -21,9 +20,11 @@ public class DocumentSortService {
 
                 //Проверяем директорию с файлами на существование и наполненность
                 if (!resource.exists()) {
-                    throw new CheckFileException("File doesn't exist! Enter another one path to the file");
+                    System.out.println("File doesn't exist! Enter another one path to the file.");
+                    throw new CheckFileException("File doesn't exist.");
                 } else if (resource.length() == 0) {
-                    throw new CheckFileException("File is empty. Try again and enter another one path to the file");
+                    System.out.println("File is empty! Try again and enter another one path to the file.");
+                    throw new CheckFileException("File is empty.");
                 } else {
                     //Идем по массиву и вызываем метод проверки названия
                     for (File file : resourceArray) {

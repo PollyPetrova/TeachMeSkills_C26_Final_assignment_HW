@@ -13,7 +13,7 @@ public class Logger {
             String message = date + " -> " + logMessage + " \n";
             Files.write(Paths.get(Constant.PATH_EXECUTION_LOG), message.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
-
+            //do nothing
         }
     }
 
@@ -30,7 +30,7 @@ public class Logger {
 
             Files.write(Paths.get(Constant.PATH_ERROR_LOG), sb.toString().getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
-
+            //do nothing
         }
     }
 
