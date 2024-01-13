@@ -5,4 +5,5 @@ public class CheckSessionException extends Exception{
     public CheckSessionException(String message) {
         super(message);
     }
+
 }
