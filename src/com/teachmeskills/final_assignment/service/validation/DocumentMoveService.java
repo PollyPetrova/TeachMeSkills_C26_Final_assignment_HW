@@ -11,10 +11,10 @@ public class DocumentMoveService {
     public static void moveDoc(File fileMove, File TargetDir) throws IOException {
 
         try {
-            //Создаем объекты класса путь для перемещения файлов
+            //Creating objects of the path class for moving files
             Path pathFileMove = Paths.get(fileMove.getAbsolutePath());
             Path pathTargetDir = Paths.get(TargetDir.getAbsolutePath() + "\\" + fileMove.getName());
-            //перемещаем файлы
+            //moving files
             Files.move(pathFileMove, pathTargetDir);
         } catch (IOException e) {
             throw new IOException("File moving error");

@@ -9,16 +9,16 @@ import java.util.Date;
 
 public class AuthService {
 
-    //Метод для проверки введенных логина и пароля с содержимым базы данных
+    //A method for verifying the entered username and password with the contents of the database
     public static Session doLogin(String login, String password) {
 
         Logger.logInfo(new Date(), "Start of authorization.");
-        //Элементы из базы данных дешифруются для дальнейшего сравнения
+        //Items from the database are decrypted for further comparison
         StorageMock storageMock = new StorageMock();
         String loginFromStorage = Coder.decode(storageMock.getLogin());
         String passwordFromStorage = Coder.decode(storageMock.getPassword());
 
-        //Сравнение
+        //Comparison
         if (!login.equals(loginFromStorage)) {
             Logger.logInfo(new Date(), "Login was entered wrongly.");
             System.out.println("Login or password was entered wrongly! Try again.");

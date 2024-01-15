@@ -11,13 +11,13 @@ import java.util.Date;
 public class DocumentSortService {
 
     public static void sortDocument(String path, Session session) throws CheckFileException, CheckSessionException {
-        //Проверяем жива ли сессия
+        //Checking if the session is alive
             if (session.isSessionAlive()) {
-                //Создаем массив файлов
+                //Creating an array of files
                 File resource = new File(path);
                 File[] resourceArray = resource.listFiles();
 
-                //Проверяем директорию с файлами на существование и наполненность
+                //We check the directory with files for existence and fullness
                 if (!resource.exists()) {
                     System.out.println("File doesn't exist! Enter another one path to the file.");
                     Logger.logInfo(new Date(), "File doesn't exist. Fail in file processing.");
@@ -30,7 +30,7 @@ public class DocumentSortService {
 
                 } else {
                     Logger.logInfo(new Date(), "Start of sorting files!");
-                    //Идем по массиву и вызываем метод проверки названия
+                    //Go through the array and call the name verification method
                     for (File file : resourceArray) {
                         DocumentNameValidService.checkDocNumValid(file);
                     }
@@ -38,7 +38,7 @@ public class DocumentSortService {
                 }
 
             } else {
-                //Если сессия мертва, то вывод на экран и исключение
+                //If the session is dead, then the output is displayed and an exception is thrown
                 System.out.println("Session was finished. Authorized again!");
                 Logger.logInfo(new Date(), "Session was finished. Fail in file processing.");
                 throw new CheckSessionException("Session was finished.");

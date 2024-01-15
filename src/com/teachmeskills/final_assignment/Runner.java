@@ -16,7 +16,7 @@ public class Runner {
     public static void main(String[] args) {
 
        try (Scanner scanner = new Scanner(System.in)) {
-           //Сбор кредов клиента
+           //Collecting customer credits
            System.out.println("Enter login:");
            String login = scanner.nextLine();
            System.out.println("Enter password:");
@@ -25,18 +25,18 @@ public class Runner {
            //Right login:    PolinaLiza;
            //   password: 123987;
 
-           //Создание сессии, авторизация
+           //Session creation, authorization
            Session session = AuthService.doLogin(login, password);
 
         /*System.out.println(Coder.code("PolinaLiza"));
         System.out.println(Coder.code("123987"));*/
 
            if (session != null) {
-               //Считываем путь к папке с файлами
+               //Reading the path to the file folder
                System.out.println("Enter path to the Directory:");
                String resourcePath = scanner.nextLine();
 
-               //Вызов методов для сортировки файлов, записи статистики
+               //Calling methods for sorting files, recording statistics
                try {
                    Logger.logInfo(new Date(), "The beginning of file processing.");
 

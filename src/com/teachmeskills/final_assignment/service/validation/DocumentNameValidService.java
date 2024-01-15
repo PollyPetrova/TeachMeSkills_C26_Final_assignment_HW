@@ -14,16 +14,16 @@ public class DocumentNameValidService {
 
     public static void checkDocNumValid(File doc) {
 
-        // создаем объекты класса Файл по путям к папкам
+        // creating objects of the File class by folder paths
         File validCheck = new File(PATH_VALID_CHECK);
         File validInvoice = new File(PATH_VALID_INVOICE);
         File validOrder = new File(PATH_VALID_ORDER);
         File invalidDocName = new File(PATH_INVALID_DOC);
 
-        //Проверяем формат файла
+        //Checking the file format
         if (doc.getName().endsWith(".txt")) {
 
-            //проверяем на валидность чека, вызываем метод перемещения
+            //we check the validity of the receipt, call the transfer method
             if (doc.getName().matches(REGEXP_DOC_CHECK)) {
                 try {
                     DocumentMoveService.moveDoc(doc, validCheck);
@@ -33,7 +33,7 @@ public class DocumentNameValidService {
                 }
             }
 
-            //проверяем на валидность инвойса, вызываем метод перемещения
+            //we check the validity of the invoice, call the transfer method
             if (doc.getName().matches(REGEXP_DOC_INVOICE)) {
                 try {
                     DocumentMoveService.moveDoc(doc, validInvoice);
@@ -43,7 +43,7 @@ public class DocumentNameValidService {
                 }
             }
 
-            //проверяем на валидность ордера, вызываем метод перемещения
+            //we check the validity of the order, call the move method
             if (doc.getName().matches(REGEXP_DOC_ORDER)) {
                 try {
                     DocumentMoveService.moveDoc(doc, validOrder);
@@ -53,8 +53,8 @@ public class DocumentNameValidService {
                 }
             }
 
-            //запись невалидных файлов, непрошедших предыдущие проверки, но подходящих по формату
-            //вызываем метод перемещения
+            //recording invalid files that have not passed previous checks, but are suitable in format
+            //calling the move method
             if (!doc.getName().matches(REGEXP_DOC_CHECK)
                     && !doc.getName().matches(REGEXP_DOC_ORDER)
                     && !doc.getName().matches(REGEXP_DOC_INVOICE)) {
@@ -66,7 +66,7 @@ public class DocumentNameValidService {
                     Logger.logInfo(new Date(), e.getMessage());
                 }
             }
-            //Перемещаем объекты неверного формата
+            //Moving objects of the wrong format
         } else {
             try {
                 DocumentMoveService.moveDoc(doc, invalidDocName);

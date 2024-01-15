@@ -17,7 +17,7 @@ public class Session {
         setExpDate();
     }
 
-    //Метод для проверки существования сессии
+    //A method for verifying the existence of a session
     public boolean isSessionAlive() {
         if (this.accessToken.length() == Constant.ACCESS_TOKEN_LENGTH && this.expDate.after(new Date())) {
             return true;
@@ -26,7 +26,7 @@ public class Session {
         }
     }
 
-    //Метод для определения токена для сессии
+    //Method for determining the token for the session
     //!Андрей говорил просто переписать этот метод, мы пока не проходили как его реализовать
     private void setAccessToken() {
         String symbols = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -37,7 +37,7 @@ public class Session {
                 .collect(Collectors.joining());
     }
 
-    //Метод для определения времени, когда сессия прекратит свое существование
+    //A method for determining the time when a session will cease to exist
     private void setExpDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());

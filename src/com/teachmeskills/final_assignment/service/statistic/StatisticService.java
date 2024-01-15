@@ -14,26 +14,26 @@ import static com.teachmeskills.final_assignment.util.Constant.*;
 
 public class StatisticService {
 
-    //Суммирование годовой суммы Check
+    //Summing up the annual Check amount
     public static double calculateStatisticCheck(String path) throws IOException {
         double amountAllCheck = processFiles(path);
         amountAllCheck *= EURO_TO_USD;
         return amountAllCheck * 100 / 100;
     }
 
-    //Суммирование годовой суммы Invoice
+    //Summing up the annual Invoice amount
     public static double calculateStatisticInvoice(String path) throws IOException {
         double amountAllInvoice = processFiles(path);
         return amountAllInvoice * 100 / 100;
     }
 
-    //Суммирование годовой суммы Order
+    //Summing up the annual Order amount
     public static double calculateStatisticOrder(String path) throws IOException {
         double amountAllOrder = processFiles(path);
         return amountAllOrder * 100 / 100;
     }
 
-    //Суммирование общей годовой суммы оборотов и запись в файл статистики
+    //Summing up the total annual turnover amount and writing to the statistics file
     public static void calculateStatisticFinal(double check, double invoice, double order) throws IOException {
         //Суммирование, составление строк статистики
         double result = check + invoice + order;
@@ -42,7 +42,7 @@ public class StatisticService {
         String orderResult = "The total annual amount of transfers in USD by order: " + order + "\n";
         String resultAll = "The total annual amount of transfers in USD by all documents: " + result + "\n";
 
-        //Запись в файл статистики
+        //Writing to the statistics file
         try {
             Path pathStatistic = Path.of(PATH_YEAR_TURNOVER);
             Files.write(pathStatistic, (checkResult + invoiceResult + orderResult + resultAll).getBytes(), StandardOpenOption.APPEND);
@@ -51,68 +51,68 @@ public class StatisticService {
         }
     }
 
-    //Метод для нахождения суммы транзакции в файлах
+    //A method for finding the transaction amount in files
     private static double processFiles(String path) throws IOException {
-        //Создаем массив файлов
+        //Creating an array of files
         File directory = new File(path);
         File[] filesArray = directory.listFiles();
         double totalAmount = 0;
 
-        //Проверка на наполненность массива
+        //Checking for the fullness of the array
         if (filesArray != null) {
-            //Идем по массиву
+            //We go through the array
             for (File file : filesArray) {
                 String filePath = file.getPath();
 
-                //Создаем объект класса BufferedReader для чтения из файла
+                //Creating an object of the BufferedReader class to read from a file
                 try (BufferedReader reader = Files.newBufferedReader(Path.of(filePath))) {
-                    //Строка в которой будет лежать строка, включающая сумму перевода
+                    //The line that will contain the line including the transfer amount
                     String stringStatistic;
                     while ((stringStatistic = reader.readLine()) != null) {
 
-                        //Проверяем соответствует ли строка регулярному выражению  для файлов CHECK
+                        //Check if the string matches the regular expression for the CHECK files
                         if (!stringStatistic.isEmpty() && stringStatistic.matches(REGEXP_TRANSACTION_CHECK)) {
-                            double amount; // переменная для суммы из конкретного файла
-                            String[] statistic = stringStatistic.split(" "); // массив из строки с суммой
-                            amount = Double.parseDouble(statistic[4].replace(",", ".")); // преобразование и запись в переменную суммы перевода
+                            double amount; //a variable for the amount from a specific file
+                            String[] statistic = stringStatistic.split(" "); // an array of a string with a sum
+                            amount = Double.parseDouble(statistic[4].replace(",", ".")); // converting and writing the transfer amount to a variable
                             totalAmount += amount;
 
-                            //Проверяем соответствует ли строка регулярному выражению  для файлов INVOICE
+                            //Check if the string matches the regular expression for the INVOICE files
                         } else if (!stringStatistic.isEmpty() && stringStatistic.matches(REGEXP_TRANSACTION_INVOICE)) {
-                            double amount;// переменная для суммы из конкретного файла
+                            double amount;//a variable for the amount from a specific file
 
-                            //Создаем объекты класса паттерн и метчер для поиска суммы из строки
+                            //Creating objects of the pattern and metcher class to search for the sum from the string
                             Pattern pattern = Pattern.compile(REGEXP_AMOUNT_INVOICE);
                             Matcher matcher = pattern.matcher(stringStatistic);
 
-                            //Объект класса стрингбилдер для составления строки суммы по регурярному выражению
-                            //из строки с статистикой суммы
+                            //An object of the stringbuilder class for composing a sum string using a regular expression
+                            //from the line with the sum statistics
                             StringBuilder amountStr = new StringBuilder();
                             while (matcher.find()) {
                                 amountStr.append(matcher.group());
                             }
 
-                            //преобразование и запись в переменную суммы перевода, суммирование с полной суммой документов
+                            //conversion and recording of the transfer amount into a variable, summation with the full amount of documents
                             amount = Double.parseDouble(amountStr.toString());
                             totalAmount = totalAmount + amount;
 
-                            //Проверяем соответствует ли строка регулярному выражению  для файлов ORDER
+                            //We check whether the string matches the regular expression for the ORDER files
                         } else if (!stringStatistic.isEmpty() && stringStatistic.matches(REGEXP_TRANSACTION_ORDER)) {
-                            double amount;// переменная для суммы из конкретного файла
+                            double amount;// a variable for the amount from a specific file
 
-                            //для поиска цифр в строке используем метчер и паттерн
+                            //to search for numbers in a string, we use a metcher and a pattern
                             Pattern pattern = Pattern.compile(REGEXP_AMOUNT_ORDER);
                             Matcher matcher = pattern.matcher(stringStatistic);
 
-                            //в стрингбилдер записываем найденные цифры
+                            //we write down the found numbers in the stringbuilder
                             StringBuilder amountStr = new StringBuilder();
                             while (matcher.find()) {
                                 amountStr.append(matcher.group());
                             }
 
-                            //приводим к дабл строку с суммой
+                            //we bring the row with the sum to the double
                             amount = Double.parseDouble(amountStr.toString().replace(",", ""));
-                            //прибавляем к итоговой сумме
+                            //we add to the total amount
                             totalAmount += amount;
                         }
                     }

@@ -6,21 +6,21 @@ import java.util.stream.Collectors;
 
 public class Coder {
 
-    //Метод "из коробки" для шифрования
+    //The out-of-the-box method for encryption
     public static String code(String input) {
         String encodedString = Base64.getEncoder().encodeToString(input.getBytes());
 
         return addSalt(encodedString);
     }
 
-    //Метод "из коробки" для дешифрования
+    //Out-of-the-box method for decryption
     public static String decode(String input) {
         byte[] decodedBytes = Base64.getDecoder().decode(input.substring(10));
 
         return new String(decodedBytes);
     }
 
-    //Метод для добавления 10 рандомных символов в начале строки
+    //A method for adding 10 random characters at the beginning of a line
     private static String addSalt(String input) {
         String symbols = "abcdefghijklmnopqrstuvwxyz0123456789";
 

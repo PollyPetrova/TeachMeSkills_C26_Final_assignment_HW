@@ -7,7 +7,7 @@ import java.util.Date;
 import static com.teachmeskills.final_assignment.util.Constant.*;
 
 public class StatisticWriterService {
-    //Метод для составления статистики
+    //A method for compiling statistics
     public static void compileStatistics() {
         double checkAmountAll = 0;
         try {
