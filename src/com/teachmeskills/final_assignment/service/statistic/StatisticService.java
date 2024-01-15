@@ -16,19 +16,20 @@ public class StatisticService {
 
     //Суммирование годовой суммы Check
     public static double calculateStatisticCheck(String path) throws IOException {
-        double amountAllCheck = processFiles(path, REGEXP_TRANSACTION_CHECK);
-        return amountAllCheck * EURO_TO_USD * 100 / 100;
+        double amountAllCheck = processFiles(path);
+        amountAllCheck *= EURO_TO_USD;
+        return amountAllCheck * 100 / 100;
     }
 
     //Суммирование годовой суммы Invoice
     public static double calculateStatisticInvoice(String path) throws IOException {
-        double amountAllInvoice = processFiles(path, REGEXP_TRANSACTION_INVOICE);
+        double amountAllInvoice = processFiles(path);
         return amountAllInvoice * 100 / 100;
     }
 
     //Суммирование годовой суммы Order
     public static double calculateStatisticOrder(String path) throws IOException {
-        double amountAllOrder = processFiles(path, REGEXP_TRANSACTION_ORDER);
+        double amountAllOrder = processFiles(path);
         return amountAllOrder * 100 / 100;
     }
 
@@ -51,7 +52,7 @@ public class StatisticService {
     }
 
     //Метод для нахождения суммы транзакции в файлах
-    private static double processFiles(String path, String regexp) throws IOException {
+    private static double processFiles(String path) throws IOException {
         //Создаем массив файлов
         File directory = new File(path);
         File[] filesArray = directory.listFiles();

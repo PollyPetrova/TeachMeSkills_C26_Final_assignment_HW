@@ -16,16 +16,20 @@ public class DocumentSortService {
                 //Создаем массив файлов
                 File resource = new File(path);
                 File[] resourceArray = resource.listFiles();
-                Logger.logInfo(new Date(), "Start of sorting files!");
 
                 //Проверяем директорию с файлами на существование и наполненность
                 if (!resource.exists()) {
                     System.out.println("File doesn't exist! Enter another one path to the file.");
+                    Logger.logInfo(new Date(), "File doesn't exist. Fail in file processing.");
                     throw new CheckFileException("File doesn't exist.");
+
                 } else if (resource.length() == 0) {
                     System.out.println("File is empty! Try again and enter another one path to the file.");
+                    Logger.logInfo(new Date(), "File is empty. Fail in file processing.");
                     throw new CheckFileException("File is empty.");
+
                 } else {
+                    Logger.logInfo(new Date(), "Start of sorting files!");
                     //Идем по массиву и вызываем метод проверки названия
                     for (File file : resourceArray) {
                         DocumentNameValidService.checkDocNumValid(file);
@@ -36,6 +40,7 @@ public class DocumentSortService {
             } else {
                 //Если сессия мертва, то вывод на экран и исключение
                 System.out.println("Session was finished. Authorized again!");
+                Logger.logInfo(new Date(), "Session was finished. Fail in file processing.");
                 throw new CheckSessionException("Session was finished.");
             }
     }

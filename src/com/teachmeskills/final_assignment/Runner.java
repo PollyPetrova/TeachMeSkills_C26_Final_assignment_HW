@@ -7,6 +7,7 @@ import com.teachmeskills.final_assignment.service.validation.DocumentSortService
 import com.teachmeskills.final_assignment.service.statistic.StatisticWriterService;
 import com.teachmeskills.final_assignment.session.Session;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -54,7 +55,9 @@ public class Runner {
            }
 
        } catch (InputMismatchException e) {
-           Logger.errorInfo(new Date(), "Scanner closing error", e);
+           Logger.errorInfo(new Date(), "Incorrect data entered into the scanner.", e);
+       } catch (Exception e) {
+           Logger.errorInfo(new Date(), "Unexpected error.", e);
        }
 
     }
